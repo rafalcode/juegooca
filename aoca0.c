@@ -32,12 +32,12 @@
     }
 
 /* Rough work column:
-aoca[k9].uo=-1; // no speculative assigning so this wasn't necessary
+aoca[k9].oc=-1; // no speculative assigning so this wasn't necessary
 */
 
 typedef struct /* oca_t Occurence Array type */
 {
-    int uo; /* the unique occurence this array entry refers to */
+    int oc; /* the unique occurence this array entry refers to */
     int *ocinda; /* the indices corresponding to the uo unique occurence. */
     int ocisz; /* Ocurrence Index Array size */
     int ocibf; /* Ocurrence Index Array buffer */
@@ -47,7 +47,7 @@ int cmpocabyoc(const void *a, const void *b) /* compare aoca by occurence */
 {
     oca_t *oca = (oca_t*)a; /* cast our void! */
     oca_t *ocb = (oca_t*)b; /* cast our void! */
-    return oca->uo  - ocb->uo; /* integer comparison: returns positive if b > a and nagetive if a > b: i.e. highest values first */
+    return oca->oc  - ocb->oc; /* integer comparison: returns positive if b > a and nagetive if a > b: i.e. highest values first */
 }
 
 int cmpocabyoasz(const void *a, const void *b) /* compare aoca by occurence */
@@ -61,7 +61,7 @@ void prtaoca(oca_t *aoca, int aocasz)
 {
     int i, j;
     for(j=0; j<aocasz;++j) {
-        printf("val %i (sz=%i): ", aoca[j].uo, aoca[j].ocisz);
+        printf("val %i (sz=%i): ", aoca[j].oc, aoca[j].ocisz);
         for(i=0;i<aoca[j].ocisz;++i) 
             printf("%u ", aoca[j].ocinda[i]);
         putchar('\n');
@@ -84,7 +84,7 @@ oca_t *uniquevals(int *v, int vsz, int *aocasz_)
     for(i=0; i<vsz;++i) {
         new=1;
         for(j=0; j<aocasz;++j) {
-            if(aoca[j].uo == v[i]) {
+            if(aoca[j].oc == v[i]) {
                 CONDREALLOC(aoca[j].ocisz, aoca[j].ocibf, GBUF, aoca[j].ocinda, int);
 #ifdef DBG
                 printf("APPENDING aocaind %i (ou=%i) @sz %i @buf %i adding vind %i\n", j, v[i], aoca[j].ocisz, aoca[j].ocibf, i);
@@ -101,7 +101,7 @@ oca_t *uniquevals(int *v, int vsz, int *aocasz_)
 #ifdef DBG
                 printf("NEW aocaind %i (ou=%i) @sz %i @buf %i adding vind %i\n", j, v[i], aoca[j].ocisz, aoca[j].ocibf, i);
 #endif
-            aoca[aocasz-1].uo = v[i];
+            aoca[aocasz-1].oc = v[i];
             aoca[aocasz-1].ocisz++;
             aoca[aocasz-1].ocinda[aoca[j].ocisz-1] = i;
         }
@@ -118,7 +118,7 @@ oca_t *uniquevals(int *v, int vsz, int *aocasz_)
 #ifdef DBG
     printf("number of different values: %i\n", aocasz);
     for(j=0; j<aocasz;++j) {
-        printf("%i (%u): ", aoca[j].uo, aoca[j].ocisz);
+        printf("%i (%u): ", aoca[j].oc, aoca[j].ocisz);
         for(i=0;i<aoca[j].ocisz;++i) 
             printf("%i ", aoca[j].ocinda[i]);
         printf("\n"); 
