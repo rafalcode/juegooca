@@ -3,10 +3,13 @@ CC=gcc
 CFLAGS=-g -Wall
 DBGCFLAGS=-g -Wall -DDBG
 
-EXECUTABLES=aoca0
+EXECUTABLES=aoca0 aoca1
 
 # the first prototype, no args, generates a random integer counts the number of different values.
 aoca0: aoca0.c
+	${CC} ${CFLAGS} -o $@ $^
+
+aoca1: aoca1.c
 	${CC} ${CFLAGS} -o $@ $^
 
 .PHONY: clean
