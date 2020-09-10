@@ -1,4 +1,3 @@
-/* fastitch.c stitches up fasta files */
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +34,7 @@
 aoca[k9].uo=-1; // no speculative assigning so this wasn't necessary
 */
 
-typedef struct /* oca_t Occurence Array type */
+typedef struct /* oca_t OCcurence Array type */
 {
     int uo; /* the unique occurence this array entry refers to */
     int *ocinda; /* the indices corresponding to the uo unique occurence. */
