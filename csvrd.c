@@ -29,6 +29,14 @@ void prtaoca(oca_t *aoca, int aocasz)
     }
 }
 
+void prtaoca2(oca_t *aoca, int aocasz)
+{
+    int i, j;
+    for(j=0; j<aocasz;++j) {
+        printf("word %s of size %i has ocisz=%i\n ", aoca[j].uo, aoca[j].uosz, aoca[j].ocisz);
+    }
+}
+
 oca_t *uniquevals(aaw_c *aawc, int *aocasz_, int col)
 {
     unsigned char new;
@@ -403,14 +411,14 @@ int main(int argc, char *argv[])
     aaw_c *aawc=processincsv(argv[1]);
 #ifdef DBG
     prtaawcdbg(aawc);
-#else
+// #else
     // prtaawcp5(aawc); // printout original text as well as you can.
     prtaawcplain(aawc); // printout original text as well as you can.
 #endif
     // printf("Numlines: %zu\n", aawc->numl); 
     int aocasz;
     oca_t *aoca = uniquevals(aawc, &aocasz, 1);
-    prtaoca(aoca, aocasz);
+    prtaoca2(aoca, aocasz);
 
     for(int i=0;i<aocasz;++i) {
         free(aoca[i].uo);
